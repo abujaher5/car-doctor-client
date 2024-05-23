@@ -2,7 +2,11 @@ import { Link } from "react-router-dom";
 import loginImage from "../../assets/images/login/login.svg";
 import { FaFacebook, FaLinkedin } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/AuthProvider";
 const Login = () => {
+  const { logInUser, logOut } = useContext(AuthContext);
+
   const handleLogin = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -10,6 +14,13 @@ const Login = () => {
     const password = form.password.value;
 
     console.log(email, password);
+
+    logInUser(email, password)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => console.error(error));
   };
   return (
     <div className="hero min-h-screen bg-base-200">

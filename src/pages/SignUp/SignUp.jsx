@@ -4,9 +4,8 @@ import loginImage from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 
-const { createUser } = useContext(AuthContext);
-
 const SignUp = () => {
+  const { createUser } = useContext(AuthContext);
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -19,8 +18,9 @@ const SignUp = () => {
     createUser(email, password)
       .then((result) => {
         const user = result.user;
+        console.log(user);
       })
-      .then((error) => console.log(error));
+      .catch((error) => console.log(error));
   };
   return (
     <div className="hero min-h-screen bg-base-200">
